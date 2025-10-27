@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Predict - House Price Predictor</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <span class="brand">House Price Predictor</span>
+    </div>
+    <div class="nav-right">
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <h2>Predict House Price</h2>
+      <form id="houseForm" class="form-grid" method="POST">
+        <label>Area (sq ft)
+          <input type="number" id="area" name="area" min="1" required />
+        </label>
+
+        <label>Bedrooms
+          <input type="number" id="bedrooms" name="bedrooms" min="0" required />
+        </label>
+
+        <label>Bathrooms
+          <input type="number" id="bathrooms" name="bathrooms" min="0" required />
+        </label>
+        <label>
+          Number of Stories
+          <input type="number" id="stories" name="stories" min="1" required />  
+        </label>
+        <label>
+          Parking
+          <input type="number" id="parking" name="parking" min="0" required />  
+        </label>
+        <label>Main Road
+          <select id="mainroad" name="mainroad" required>
+            <option value="" selected hidden>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+        <label>Guest Room
+          <select id="guestroom" name="guestroom" required>
+            <option value="" selected hidden>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+        <label>Hot Water Heating
+          <select id="hotwaterheating" name="hotwaterheating" required>
+            <option value="" selected hidden>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+        <label>Air Conditioning
+          <select id="airconditioning" name="airconditioning" required>
+            <option value="" selected hidden>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+        <label>Furnishing Status
+          <select id="furnishingstatus" name="furnishingstatus" required>
+            <option value="" selected hidden>Select</option>
+            <option value="Furnished">Furnished</option>
+            <option value="Semi-furnished">Semi-furnished</option>
+            <option value="Unfurnished">Unfurnished</option>
+          </select>
+        </label>
+
+        <div class="btn-row full">
+          <button type="submit" class="btn">Predict Price</button>
+          <button type="button" id="clear-btn" onclick="clearForm()" class="btn alt">Clear</button>
+        </div>
+      </form>
+
+      <div class="result">
+            {% if pred %}
+              <p>Predicted Price: INR <span class="price">{{ pred }}</span></p>
+            {% else %}
+              <p class="muted">Fill the form and submit to see the predicted price here.</p>
+            {% endif %}
+           
+      </div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

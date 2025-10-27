@@ -1,0 +1,72 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard - House Price Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <span class="brand">House Price Predictor</span>
+    </div>
+    <div class="nav-right">
+      <a href="{{ url_for('predict_page') }}">Predict</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <h2>Welcome, {{ username }}</h2>
+      <p class="muted">Use the Predict page to estimate house price in India. Below is your recent prediction history.</p>
+    </section>
+
+    <section class="card">
+      <h3>Recent Predictions</h3>
+      {% if history %}
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>Area (sq ft)</th>
+              <th>Bedrooms</th>
+              <th>Bathrooms</th>
+              <th>Number of Stories</th>
+              <th>Parking</th>
+              <th>Main Road</th>
+              <th>Guest Room</th>
+              <th>Hot Water Heating</th>
+              <th>Air Conditioning</th>
+              <th>Furnishing Status</th>
+              <th>Predicted Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in history %}
+              <tr>
+                <td>{{ row.created_at }}</td>
+                <td>{{ row.area }}</td>
+                <td>{{ row.bedrooms }}</td>
+                <td>{{ row.bathrooms }}</td>
+                <td>{{ row.stories }}</td>
+                <td>{{ row.parking }}</td>
+                <td>{{ row.mainroad }}</td>
+                <td>{{ row.guestroom }}</td>
+                <td>{{ row.hotwaterheating }}</td>
+                <td>{{ row.airconditioning }}</td>
+                <td>{{ row.furnishingstatus }}</td>
+                <td>{{ row.predicted_price}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p class="muted">No predictions yet.</p>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price App - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container small">
+        <header class="header">
+        <h1>House Price Predictor</h1>
+        <p class="muted">Login to continue</p>
+    </header>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-container">
+    {% for category, message in messages %}
+    <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="card">
+      {% if show_register %}
+        <h2>Create account</h2>
+      {% else %}
+        <h2>Login</h2>
+      {% endif %}
+      <label>Username
+        <input type="text" name="username" required />
+      </label>
+      <label>Password
+        <input type="password" name="password" required />
+      </label>
+      <div class="btn-row">
+        <button type="submit" class="btn">Submit</button>
+        <a href="{{ url_for('register') }}" class="link-btn">Register</a>
+      </div>
+    </form>
+
+    <footer class="footer">
+      <small>Default account: <b>admin</b> / password123 (created by setup script)</small>
+    </footer>
+    </div>
+    
+</body>
+</html>
